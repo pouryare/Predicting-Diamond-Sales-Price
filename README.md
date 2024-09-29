@@ -1,6 +1,6 @@
 # Diamond Price Prediction
 
-This project implements a machine learning model to predict diamond prices based on various characteristics. It uses a dataset from Kaggle and provides a Jupyter notebook for data analysis, model training, and prediction.
+This project implements a machine learning model to predict diamond prices based on various characteristics. It uses a dataset from Kaggle and provides a web interface for users to input diamond features and receive price predictions.
 
 ![Project Screenshot](Screenshot.png)
 
@@ -11,53 +11,35 @@ The dataset used in this project is "The Largest Diamond Dataset Currently on Ka
 ## Features
 
 - Predicts diamond prices based on multiple features such as cut, color, clarity, carat weight, and more.
+- Web interface for easy interaction with the model.
 - Uses Random Forest Regressor for predictions.
 - Implements feature engineering to improve prediction accuracy.
-- Provides a comprehensive Jupyter notebook for data analysis and model training.
 
 ## Installation
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/pouryare/diamond-price-prediction.git
-   cd diamond-price-prediction
-   ```
+You can run this application using Docker. The Docker image is available on Docker Hub.
 
-2. Create a virtual environment (optional but recommended):
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-   ```
+To run the application:
 
-3. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
+```bash
+docker pull pouryare/diamond-price-predictor:latest
+docker run -p 8080:8080 pouryare/diamond-price-predictor:latest
+```
 
-4. Download the dataset from the Kaggle link provided above and place it in the project directory.
+The application will be available at `http://localhost:8080`.
 
 ## Usage
 
-1. Open the Jupyter notebook:
-   ```
-   jupyter notebook "Predicting Diamond Sales Price.ipynb"
-   ```
-
-2. Run the cells in the notebook sequentially to perform the following steps:
-   - Data loading and exploration
-   - Data preprocessing and feature engineering
-   - Model training and evaluation
-   - Making predictions
-
-3. You can modify the notebook to experiment with different models, features, or preprocessing steps.
+1. Access the web interface at `http://localhost:8080`.
+2. Enter the diamond characteristics in the provided form.
+3. Submit the form to receive a price prediction.
 
 ## Project Structure
 
-- `Predicting Diamond Sales Price.ipynb`: Main Jupyter notebook containing the data analysis, model training, and prediction code.
-- `diamonds.csv`: The dataset file (you need to download this from Kaggle).
-- `screenshot.png`: A screenshot of the project in action.
-
-Note: The trained model and any intermediate files generated during the notebook execution are not included in this repository due to size limitations. These will be created when you run the notebook.
+- `main.py`: Flask application that serves the web interface and handles predictions.
+- `model.py`: Contains the machine learning model and preprocessing functions.
+- `templates/index.html`: HTML template for the web interface.
+- `Dockerfile`: Used to build the Docker image for this application.
 
 ## Contributing
 
@@ -66,6 +48,10 @@ Contributions to this project are welcome! Please fork the repository and submit
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+This project was inspired by various works in the field of diamond price prediction and machine learning. We acknowledge the contributions of the open-source community and the creators of the libraries and tools used in this project.
 
 ## Contact
 
