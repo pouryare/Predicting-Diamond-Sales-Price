@@ -2,7 +2,7 @@
 
 This project implements a machine learning model to predict diamond prices based on various characteristics. It uses a dataset from Kaggle and provides a Jupyter notebook for data analysis, model training, and prediction.
 
-![Project Screenshot](screenshot.png)
+![Project Screenshot](Screenshot.png)
 
 ## Dataset
 
