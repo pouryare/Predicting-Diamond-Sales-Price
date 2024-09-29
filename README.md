@@ -55,7 +55,6 @@ The dataset used in this project is "The Largest Diamond Dataset Currently on Ka
 
 - `Predicting Diamond Sales Price.ipynb`: Main Jupyter notebook containing the data analysis, model training, and prediction code.
 - `diamonds.csv`: The dataset file (you need to download this from Kaggle).
-- `requirements.txt`: List of Python packages required for this project.
 - `screenshot.png`: A screenshot of the project in action.
 
 Note: The trained model and any intermediate files generated during the notebook execution are not included in this repository due to size limitations. These will be created when you run the notebook.
