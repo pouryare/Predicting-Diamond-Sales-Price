@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Price Prediction Model</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body { padding: 20px; }
+        .input-field { margin-bottom: 20px; }
+        .slider-value { margin-top: 10px; }
+        #prediction-result { display: none; }
+        .error-message { color: #f44336; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="header center-align">Diamond Price Prediction Model</h2>
+        <div class="row">
+            <form id="prediction-form" class="col s12" method="POST">
+                <!-- Dropdown inputs -->
+                <div class="input-field col s6">
+                    <select name="cut" required>
+                        <option value="" disabled selected>Choose cut</option>
+                        <option value="Round">Round</option>
+                        <option value="Pear">Pear</option>
+                        <option value="Oval">Oval</option>
+                        <option value="Marquise">Marquise</option>
+                        <option value="Princess">Princess</option>
+                        <option value="Emerald">Emerald</option>
+                        <option value="Heart">Heart</option>
+                        <option value="Cushion">Cushion</option>
+                        <option value="Radiant">Radiant</option>
+                        <option value="Cushion Modified">Cushion Modified</option>
+                        <option value="Asscher">Asscher</option>
+                    </select>
+                    <label>Cut</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="color" required>
+                        <option value="" disabled selected>Choose color</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="L">L</option>
+                        <option value="D">D</option>
+                        <option value="J">J</option>
+                        <option value="I">I</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="M">M</option>
+                        <option value="K">K</option>
+                    </select>
+                    <label>Color</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="clarity" required>
+                        <option value="" disabled selected>Choose clarity</option>
+                        <option value="VVS2">VVS2</option>
+                        <option value="VVS1">VVS1</option>
+                        <option value="I1">I1</option>
+                        <option value="VS1">VS1</option>
+                        <option value="VS2">VS2</option>
+                        <option value="IF">IF</option>
+                        <option value="SI2">SI2</option>
+                        <option value="I2">I2</option>
+                        <option value="SI1">SI1</option>
+                        <option value="SI3">SI3</option>
+                        <option value="I3">I3</option>
+                    </select>
+                    <label>Clarity</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="cut_quality" required>
+                        <option value="" disabled selected>Choose cut quality</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Ideal">Ideal</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                    <label>Cut Quality</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="lab" required>
+                        <option value="" disabled selected>Choose lab</option>
+                        <option value="IGI">IGI</option>
+                        <option value="GIA">GIA</option>
+                        <option value="HRD">HRD</option>
+                    </select>
+                    <label>Lab</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="symmetry" required>
+                        <option value="" disabled selected>Choose symmetry</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                    <label>Symmetry</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="polish" required>
+                        <option value="" disabled selected>Choose polish</option>
+                        <option value="Very Good">Very Good</option>
+                        <option value="Excellent">Excellent</option>
+                        <option value="Good">Good</option>
+                        <option value="Fair">Fair</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                    <label>Polish</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="eye_clean" required>
+                        <option value="" disabled selected>Choose eye clean</option>
+                        <option value="Yes">Yes</option>
+                        <option value="E1">E1</option>
+                        <option value="Borderline">Borderline</option>
+                        <option value="No">No</option>
+                    </select>
+                    <label>Eye Clean</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="culet_size" required>
+                        <option value="" disabled selected>Choose culet size</option>
+                        <option value="N">N</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="VS">VS</option>
+                        <option value="L">L</option>
+                        <option value="EL">EL</option>
+                        <option value="SL">SL</option>
+                        <option value="VL">VL</option>
+                    </select>
+                    <label>Culet Size</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="culet_condition" required>
+                        <option value="" disabled selected>Choose culet condition</option>
+                        <option value="Abraded">Abraded</option>
+                        <option value="Chipped">Chipped</option>
+                        <option value="Pointed">Pointed</option>
+                    </select>
+                    <label>Culet Condition</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="girdle_min" required>
+                        <option value="" disabled selected>Choose girdle min</option>
+                        <option value="M">M</option>
+                        <option value="STK">STK</option>
+                        <option value="TN">TN</option>
+                        <option value="TK">TK</option>
+                        <option value="VTN">VTN</option>
+                        <option value="VTK">VTK</option>
+                        <option value="XTK">XTK</option>
+                        <option value="XTN">XTN</option>
+                        <option value="STN">STN</option>
+                    </select>
+                    <label>Girdle Min</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="girdle_max" required>
+                        <option value="" disabled selected>Choose girdle max</option>
+                        <option value="M">M</option>
+                        <option value="STK">STK</option>
+                        <option value="TK">TK</option>
+                        <option value="TN">TN</option>
+                        <option value="VTK">VTK</option>
+                        <option value="XTK">XTK</option>
+                        <option value="XTN">XTN</option>
+                        <option value="VTN">VTN</option>
+                        <option value="STN">STN</option>
+                    </select>
+                    <label>Girdle Max</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="fluor_color" required>
+                        <option value="" disabled selected>Choose fluorescence color</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Green">Green</option>
+                        <option value="White">White</option>
+                        <option value="Orange">Orange</option>
+                    </select>
+                    <label>Fluorescence Color</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="fluor_intensity" required>
+                        <option value="" disabled selected>Choose fluorescence intensity</option>
+                        <option value="None">None</option>
+                        <option value="Very Slight">Very Slight</option>
+                        <option value="Strong">Strong</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Faint">Faint</option>
+                        <option value="Very Strong">Very Strong</option>
+                        <option value="Slight">Slight</option>
+                    </select>
+                    <label>Fluorescence Intensity</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="fancy_color_dominant_color" required>
+                        <option value="" disabled selected>Choose fancy color dominant</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Brown">Brown</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Pink">Pink</option>
+                        <option value="Black">Black</option>
+                        <option value="Other">Other</option>
+                        <option value="Gray">Gray</option>
+                        <option value="Purple">Purple</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Green">Green</option>
+                        <option value="Chameleon">Chameleon</option>
+                        <option value="Red">Red</option>
+                    </select>
+                    <label>Fancy Color Dominant</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="fancy_color_secondary_color" required>
+                        <option value="" disabled selected>Choose fancy color secondary</option>
+                        <option value="Purple">Purple</option>
+                        <option value="Green">Green</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Brown">Brown</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Pink">Pink</option>
+                        <option value="Gray">Gray</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Violet">Violet</option>
+                        <option value="Red">Red</option>
+                    </select>
+                    <label>Fancy Color Secondary</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="fancy_color_overtone" required>
+                        <option value="" disabled selected>Choose fancy color overtone</option>
+                        <option value="None">None</option>
+                        <option value="Yellowish">Yellowish</option>
+                        <option value="Brownish">Brownish</option>
+                        <option value="Pinkish">Pinkish</option>
+                        <option value="Greenish">Greenish</option>
+                        <option value="Orangey">Orangey</option>
+                        <option value="Purplish">Purplish</option>
+                        <option value="Grayish">Grayish</option>
+                    </select>
+                    <label>Fancy Color Overtone</label>
+                </div>
+                <div class="input-field col s6">
+                    <select name="fancy_color_intensity" required>
+                        <option value="" disabled selected>Choose fancy color intensity</option>
+                        <option value="Fancy">Fancy</option>
+                        <option value="Very Light">Very Light</option>
+                        <option value="Faint">Faint</option>
+                        <option value="Fancy Light">Fancy Light</option>
+                        <option value="Light">Light</option>
+                        <option value="Fancy Deep">Fancy Deep</option>
+                        <option value="Fancy Intense">Fancy Intense</option>
+                        <option value="Fancy Dark">Fancy Dark</option>
+                        <option value="Fancy Vivid">Fancy Vivid</option>
+                    </select>
+                    <label>Fancy Color Intensity</label>
+                </div>
+
+                <!-- Slider and number inputs -->
+                <div class="input-field col s6">
+                    <p class="range-field">
+                        <input type="range" name="carat_weight" min="0.08" max="19.35" step="0.01" id="carat_weight_slider" />
+                    </p>
+                    <input type="number" name="carat_weight_number" min="0.08" max="19.35" step="0.01" id="carat_weight_number" required />
+                    <label for="carat_weight_number">Carat Weight</label>
+                </div>
+                <div class="input-field col s6">
+                    <p class="range-field">
+                        <input type="range" name="depth_percent" min="0" max="98.7" step="0.1" id="depth_percent_slider" />
+                    </p>
+                    <input type="number" name="depth_percent_number" min="0" max="98.7" step="0.1" id="depth_percent_number" required />
+                    <label for="depth_percent_number">Depth Percent</label>
+                </div>
+                <div class="input-field col s6">
+                    <p class="range-field">
+                        <input type="range" name="table_percent" min="0" max="94" step="0.1" id="table_percent_slider" />
+                    </p>
+                    <input type="number" name="table_percent_number" min="0" max="94" step="0.1" id="table_percent_number" required />
+                    <label for="table_percent_number">Table Percent</label>
+                </div>
+                <div class="input-field col s6">
+                    <p class="range-field">
+                        <input type="range" name="meas_length" min="0" max="93.66" step="0.01" id="meas_length_slider" />
+                    </p>
+                    <input type="number" name="meas_length_number" min="0" max="93.66" step="0.01" id="meas_length_number" required />
+                    <label for="meas_length_number">Measurement Length</label>
+                </div>
+                <div class="input-field col s6">
+                    <p class="range-field">
+                        <input type="range" name="meas_width" min="0" max="62.3" step="0.01" id="meas_width_slider" />
+                    </p>
+                    <input type="number" name="meas_width_number" min="0" max="62.3" step="0.01" id="meas_width_number" required />
+                    <label for="meas_width_number">Measurement Width</label>
+                </div>
+                <div class="input-field col s6">
+                    <p class="range-field">
+                        <input type="range" name="meas_depth" min="0" max="76.3" step="0.01" id="meas_depth_slider" />
+                    </p>
+                    <input type="number" name="meas_depth_number" min="0" max="76.3" step="0.01" id="meas_depth_number" required />
+                    <label for="meas_depth_number">Measurement Depth</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit">Predict Price
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="prediction-result" class="row">
+            <div class="col s12">
+                <div class="card-panel teal lighten-2">
+                    <span class="white-text">
+                        <h4>Predicted Price: $<span id="predicted-price"></span></h4>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="error-message" class="row" style="display: none;">
+            <div class="col s12">
+                <div class="card-panel red lighten-2">
+                    <span class="white-text">
+                        <h4>Error: <span id="error-text"></span></h4>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+
+            var sliders = document.querySelectorAll('input[type=range]');
+            sliders.forEach(function(slider) {
+                slider.addEventListener('input', function() {
+                    var numberId = this.id.replace('_slider', '_number');
+                    document.getElementById(numberId).value = this.value;
+                });
+            });
+
+            var numbers = document.querySelectorAll('input[type=number]');
+            numbers.forEach(function(number) {
+                number.addEventListener('input', function() {
+                    var sliderId = this.id.replace('_number', '_slider');
+                    document.getElementById(sliderId).value = this.value;
+                });
+            });
+
+            // Form submission and validation
+            $('#prediction-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Clear previous error messages
+                $('.error-message').remove();
+                
+                // Validate form
+                var isValid = true;
+                $('select, input[type="number"]').each(function() {
+                    if ($(this).val() === null || $(this).val() === '') {
+                        isValid = false;
+                        $(this).after('<div class="error-message">This field is required.</div>');
+                    }
+                });
+
+                if (isValid) {
+                    // If form is valid, submit via AJAX
+                    $.ajax({
+                        url: '/predict',  // Update this to match your Flask route
+                        method: 'POST',
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            if (response.error) {
+                                $('#error-text').text(response.error);
+                                $('#error-message').show();
+                                $('#prediction-result').hide();
+                            } else {
+                                $('#predicted-price').text(response.predicted_price.toFixed(2));
+                                $('#prediction-result').show();
+                                $('#error-message').hide();
+                            }
+                        },
+                        error: function() {
+                            $('#error-text').text('An error occurred. Please try again.');
+                            $('#error-message').show();
+                            $('#prediction-result').hide();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
