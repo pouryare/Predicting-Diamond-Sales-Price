@@ -379,7 +379,7 @@
                 if (isValid) {
                     // If form is valid, submit via AJAX
                     $.ajax({
-                        url: '/predict',  // Update this to match your Flask route
+                        url: '/predict',
                         method: 'POST',
                         data: $(this).serialize(),
                         success: function(response) {
